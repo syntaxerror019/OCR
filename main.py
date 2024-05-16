@@ -13,7 +13,7 @@ hex_color = '#7d502f'  #fffff would be white..
 bgr_color = hex_to_bgr(hex_color)
 
 # open up the image
-image = cv2.imread(r'C:\Users\Bob\Desktop\screen.png')
+image = cv2.imread(r'C:\Path\To\Your\Image\file.png')
 
 # create masks
 lower = np.array(bgr_color)
@@ -44,6 +44,9 @@ for i in range(num_boxes):
     (x, y, w, h) = (detection_data['left'][i], detection_data['top'][i], detection_data['width'][i], detection_data['height'][i])
     text = detection_data['text'][i]
     if text.strip():  # Check if the text is not empty (sometimes it generated weird results...)
+        
+        print(f'Text: {text}, X: {x}, Y: {y}, Width: {w}, Height: {h}')
+        
         cv2.rectangle(binary_result, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cv2.putText(binary_result, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
